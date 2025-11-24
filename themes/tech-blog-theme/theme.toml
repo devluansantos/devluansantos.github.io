@@ -7,6 +7,6 @@ features = ["accessibility", "responsive", "syntax-highlighting"]
 min_version = "0.100.0"
 
 [author]
-  name = "Seu Nome"
+  name = "Luan Santos"
   homepage = "https://example.com"
 
