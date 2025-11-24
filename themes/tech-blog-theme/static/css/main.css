@@ -384,7 +384,7 @@ main {
 }
 
 .articles-title {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-light);
     margin-bottom: calc(var(--spacing-unit) * 2);
