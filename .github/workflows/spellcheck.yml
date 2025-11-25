@@ -19,5 +19,4 @@ jobs:
         with:
           files: "*.md content/**/*.md themes/**/*.md"
           dictionaries: ".github/dictionary.txt"
-          fail_on_error: false
 

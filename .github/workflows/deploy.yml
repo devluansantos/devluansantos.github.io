@@ -55,6 +55,8 @@ jobs:
           fi
 
       - name: Build assets
+        env:
+          NODE_ENV: production
         run: |
           npm run build:js || echo "⚠️  JavaScript build skipped"
           npm run build:css || echo "⚠️  CSS build skipped"

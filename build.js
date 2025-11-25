@@ -10,11 +10,11 @@ const { execSync } = require('child_process');
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Build JavaScript
-function buildJS() {
+async function buildJS() {
     console.log('📦 Building JavaScript...');
     
     try {
-        build({
+        await build({
             entryPoints: ['themes/tech-blog-theme/static/js/main.js'],
             bundle: true,
             format: 'esm',
@@ -23,12 +23,8 @@ function buildJS() {
             sourcemap: !isProduction,
             target: 'es2020',
             platform: 'browser',
-        }).then(() => {
-            console.log('✅ JavaScript built successfully!');
-        }).catch((error) => {
-            console.error('❌ JavaScript build failed:', error);
-            process.exit(1);
         });
+        console.log('✅ JavaScript built successfully!');
     } catch (error) {
         console.error('❌ JavaScript build failed:', error);
         process.exit(1);
@@ -50,14 +46,17 @@ function buildCSS() {
 }
 
 // Main
-function main() {
+async function main() {
     console.log('🚀 Starting build process...\n');
     
-    buildJS();
+    await buildJS();
     buildCSS();
     
     console.log('\n✨ Build complete!');
 }
 
-main();
+main().catch((error) => {
+    console.error('❌ Build process failed:', error);
+    process.exit(1);
+});
 
