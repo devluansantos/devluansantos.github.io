@@ -1,6 +1,6 @@
 baseURL = 'https://lnxsantos.github.io/'
 languageCode = 'pt-br'
-title = 'Luan Santos'
+title = 'lnxsantos'
 # theme removed - using layouts from root
 
 # Configurações de produção

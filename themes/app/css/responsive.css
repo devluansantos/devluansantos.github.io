@@ -668,7 +668,6 @@ html[data-theme="dark"] pre,
 }
 
 [data-theme="dark"] .nav-menu {
-    background-color: var(--bg-color);
     border-top-color: var(--border-color);
 }
 
@@ -697,7 +696,6 @@ html[data-theme="dark"] pre,
     }
     
     :root:not([data-theme="light"]) .nav-menu {
-        background-color: var(--bg-color);
         border-top-color: var(--border-color);
     }
 }

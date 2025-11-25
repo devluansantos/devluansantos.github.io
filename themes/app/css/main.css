@@ -356,7 +356,7 @@ img {
     padding: 6px 0;
     border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .nav-link:hover,
@@ -3191,7 +3191,6 @@ html[data-theme="dark"] pre,
 }
 
 [data-theme="dark"] .nav-menu {
-    background-color: var(--bg-color);
     border-top-color: var(--border-color);
 }
 
@@ -3220,7 +3219,6 @@ html[data-theme="dark"] pre,
     }
     
     :root:not([data-theme="light"]) .nav-menu {
-        background-color: var(--bg-color);
         border-top-color: var(--border-color);
     }
 }
