@@ -4,7 +4,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ CSS Modularizado
 
-### Estrutura Criada:
+### Estrutura Criada
+
 - `variables.css` - Variáveis CSS e design system
 - `reset.css` - Reset e estilos base
 - `layout.css` - Layout (header, footer, container, main)
@@ -14,7 +15,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 - `code.css` - Syntax highlighting e code blocks
 - `responsive.css` - Media queries e estilos mobile
 
-### Valores Mágicos Convertidos:
+### Valores Mágicos Convertidos
+
 - `60px` → `--spacing-main-top`
 - `30px` → Variáveis de espaçamento
 - Valores hardcoded convertidos para variáveis CSS
@@ -22,7 +24,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ JavaScript Modularizado
 
-### Módulos Criados:
+### Módulos Criados
+
 - `navigation.js` - Gerenciamento de navegação mobile
 - `theme.js` - Gerenciamento de tema dark/light
 - `smooth-scroll.js` - Scroll suave para âncoras
@@ -31,7 +34,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 - `pwa.js` - Funcionalidades PWA
 - `main.js` - Entry point modular
 
-### Melhorias:
+### Melhorias
+
 - Event delegation implementado
 - Código ES6 modules
 - Separação de responsabilidades
@@ -40,21 +44,24 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ Build System
 
-### Configuração:
+### Configuração
+
 - `build.js` - Script de build customizado
 - `esbuild` - Bundling e minificação JavaScript
 - `postcss` - Processamento CSS (minificação, autoprefixer)
 - Build condicional (produção vs desenvolvimento)
 - Source maps em desenvolvimento
 
-### Scripts:
+### Scripts
+
 - `npm run build:js` - Build JavaScript
 - `npm run build:css` - Build CSS
 - `npm run build` - Build completo
 
 ## ✅ PWA (Progressive Web App)
 
-### Implementado:
+### Implementado
+
 - Service Worker (`sw.js`) - Cache e offline support
 - Web App Manifest (`manifest.json`)
 - PWA module para gerenciamento
@@ -62,7 +69,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 - Update notifications
 - Meta tags PWA no head
 
-### Funcionalidades:
+### Funcionalidades
+
 - Cache de assets estáticos
 - Cache dinâmico de páginas
 - Offline fallback
@@ -70,20 +78,23 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ Testes Unitários
 
-### Configuração:
+### Configuração
+
 - Vitest configurado
 - Testes para Navigation
 - Testes para ThemeManager
 - Coverage configurado
 - jsdom para DOM testing
 
-### Scripts:
+### Scripts
+
 - `npm run test` - Executar testes
 - `npm run test:watch` - Watch mode
 
 ## ✅ TypeScript
 
-### Configuração:
+### Configuração
+
 - `tsconfig.json` criado
 - ESLint com suporte TypeScript
 - Exemplo: `navigation.ts`
@@ -92,7 +103,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ Estrutura e Configuração
 
-### Arquivos Criados:
+### Arquivos Criados
+
 - `.gitignore` - Ignora arquivos desnecessários
 - `.github/workflows/deploy.yml` - CI/CD para GitHub Pages
 - `.eslintrc.js` - Configuração ESLint (com TypeScript)
@@ -107,7 +119,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ Performance
 
-### Otimizações:
+### Otimizações
+
 - Font loading otimizado com `display=swap` e loading assíncrono
 - Lazy loading de imagens nativo + IntersectionObserver
 - CSS modularizado para melhor cache
@@ -117,7 +130,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## ✅ Segurança
 
-### Melhorias:
+### Melhorias
+
 - Content Security Policy (CSP) adicionado
 - `unsafe = false` no Hugo (HTML arbitrário desabilitado)
 - Sanitização nos shortcodes:
@@ -128,7 +142,8 @@ Este documento lista todas as melhorias de engenharia implementadas no projeto.
 
 ## 📦 Instalação
 
-### Pré-requisitos:
+### Pré-requisitos
+
 ```bash
 # Node.js 18+ (para linting, build, testes)
 node --version
@@ -137,14 +152,16 @@ node --version
 hugo version
 ```
 
-### Instalar Dependências:
+### Instalar Dependências
+
 ```bash
 npm install
 # ou
 make deps
 ```
 
-### Scripts Disponíveis:
+### Scripts Disponíveis
+
 ```bash
 npm run lint          # Lint JS e CSS
 npm run lint:js       # Lint apenas JavaScript
@@ -157,8 +174,10 @@ npm run test          # Executar testes
 npm run test:watch    # Watch mode para testes
 ```
 
-### Pre-commit Hooks:
+### Pre-commit Hooks
+
 Os hooks são executados automaticamente ao fazer commit. Para instalar Husky:
+
 ```bash
 npx husky install
 ```
@@ -167,7 +186,8 @@ npx husky install
 
 O CI/CD está configurado para fazer deploy automático no GitHub Pages quando você faz push para `master` ou `main`.
 
-### Workflow:
+### Workflow
+
 1. Checkout do código
 2. Setup Hugo Extended
 3. Setup Node.js
@@ -200,11 +220,48 @@ O CI/CD está configurado para fazer deploy automático no GitHub Pages quando v
 - ✅ Performance (100%)
 - ✅ Segurança (100%)
 
+## ✅ Melhorias Adicionais Implementadas
+
+### Testes de Cobertura
+- ✅ Testes adicionais para `CodeCopy`, `SmoothScroll`, `LazyLoad`
+- ✅ Configuração de coverage com Vitest
+- ✅ Script `npm run test:coverage` para análise de cobertura
+
+### Testes E2E
+- ✅ Playwright configurado
+- ✅ Testes de navegação e tema
+- ✅ Suporte para múltiplos navegadores (Chrome, Firefox, Safari, Mobile)
+- ✅ Scripts: `npm run test:e2e` e `npm run test:e2e:ui`
+
+### Analytics/Telemetria
+- ✅ Módulo Analytics com suporte a Plausible (privacy-focused)
+- ✅ Suporte para analytics customizado
+- ✅ Tracking de page views e outbound links
+- ✅ Configurável via JavaScript
+
+### SEO Melhorado
+- ✅ Structured Data (JSON-LD) implementado
+- ✅ Schema.org para Articles, WebSite e Person
+- ✅ Meta tags otimizadas
+- ✅ Suporte para rich snippets
+
+### Sitemap Dinâmico
+- ✅ Configuração de sitemap no Hugo
+- ✅ Geração automática de sitemap.xml
+- ✅ Configuração de changefreq e priority
+
+### Comentários
+- ✅ Sistema de comentários implementado
+- ✅ Suporte para Giscus (GitHub Discussions)
+- ✅ Suporte para Utterances (GitHub Issues)
+- ✅ Suporte para comentários customizados
+- ✅ CSS dedicado para seção de comentários
+- ✅ Configurável via `hugo.toml`
+
 ## 🔄 Próximos Passos (Opcional)
 
-- [ ] Adicionar mais testes de cobertura
-- [ ] Implementar E2E tests (Playwright/Cypress)
-- [ ] Adicionar analytics/telemetria
-- [ ] Melhorar SEO (structured data)
-- [ ] Adicionar sitemap.xml dinâmico
-- [ ] Implementar comentários (opcional)
+- [ ] Adicionar mais testes E2E para outras funcionalidades
+- [ ] Configurar Giscus/Utterances com repositório real
+- [ ] Adicionar mais structured data (BreadcrumbList, etc.)
+- [ ] Implementar search functionality
+- [ ] Adicionar dark mode toggle melhorado

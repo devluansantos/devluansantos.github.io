@@ -9,6 +9,7 @@ import { SmoothScroll } from './smooth-scroll.js';
 import { CodeCopy } from './code-copy.js';
 import { LazyLoad } from './lazy-load.js';
 import { PWA } from './pwa.js';
+import { Analytics } from './analytics.js';
 
 class App {
     constructor() {
@@ -33,7 +34,8 @@ class App {
             new SmoothScroll(),
             new CodeCopy(),
             new LazyLoad(),
-            new PWA()
+            new PWA(),
+            new Analytics()
         );
     }
 }

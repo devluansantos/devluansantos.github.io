@@ -16,6 +16,8 @@
             {{ .Content }}
         </div>
 
+        {{- partial "comments.html" . -}}
+
         <footer class="post-footer">
             <nav class="post-navigation" aria-label="Navegação entre posts">
                 {{ with .PrevInSection }}

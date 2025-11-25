@@ -66,3 +66,30 @@ theme = 'tech-blog-theme'
   home = ["HTML", "RSS"]
   page = ["HTML"]
 
+# Sitemap
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# Configurações de comentários
+[params.comments]
+  provider = "giscus"  # "giscus", "utterances", "custom", or "none"
+  
+  [params.comments.giscus]
+    # IMPORTANTE: Para obter os IDs necessários:
+    # 1. Acesse https://giscus.app
+    # 2. Configure com seu repositório GitHub
+    # 3. Habilite Discussions no repositório (Settings > General > Features > Discussions)
+    # 4. Copie o repoId e categoryId gerados
+    repo = "lnxsantos/lnxsantos.github.io"  # Repositório onde os comentários serão armazenados
+    repoId = ""  # Obtenha em https://giscus.app após configurar
+    category = "Announcements"  # Categoria padrão para discussões
+    categoryId = ""  # Obtenha em https://giscus.app após configurar
+  
+  [params.comments.utterances]
+    repo = ""  # e.g., "username/repo"
+  
+  [params.comments.custom]
+    customHTML = ""  # Custom HTML for comments
+

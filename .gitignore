@@ -42,3 +42,14 @@ ENV/
 *.tmp
 *.temp
 layout_temp.css
+
+# Test results
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Bundle files (generated)
+themes/tech-blog-theme/static/js/main.bundle.js
+themes/tech-blog-theme/static/js/main.bundle.js.map
+themes/tech-blog-theme/static/css/dist/
