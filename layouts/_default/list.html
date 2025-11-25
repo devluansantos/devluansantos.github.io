@@ -7,15 +7,39 @@
         <div class="year-group" data-year="{{ .Key }}">
             <h2 class="year-title">{{ .Key }}</h2>
             <div class="articles-list">
-                {{ range .Pages }}
-                <div class="article-item">
-                    <time datetime="{{ .Date.Format "2006-01-02" }}" class="article-date" itemprop="datePublished">
-                        {{ .Date.Format "2006-01-02" }}
-                    </time>
-                    <a href="{{ .Permalink }}" class="article-link" itemprop="url">
-                        <span itemprop="headline">{{ .Title }}</span>
-                    </a>
-                </div>
+                {{ range $index, $post := .Pages }}
+                {{ $postID := "" }}
+                {{ if $post.File }}
+                    {{ $postID = $post.File.UniqueID }}
+                {{ else }}
+                    {{ $postID = ($post.Permalink | urlize) }}
+                {{ end }}
+                <article class="article-item" itemscope itemtype="https://schema.org/BlogPosting" aria-labelledby="post-title-{{ $postID }}">
+                    <header class="article-meta">
+                        <time datetime="{{ $post.Date.Format "2006-01-02" }}" class="article-date" itemprop="datePublished">{{ $post.Date.Format "2006-01-02" }}</time>
+                    </header>
+
+                    <div class="article-body">
+                        <h2 id="post-title-{{ $postID }}" class="article-title" itemprop="headline">
+                            <a href="{{ $post.Permalink }}" class="article-link" itemprop="url">{{ $post.Title }}</a>
+                        </h2>
+
+                        <!-- resumo: prioriza .Params.excerpt, senão .Summary, senão truncamento simples -->
+                        <p class="article-excerpt" itemprop="description">
+                            {{ if $post.Params.excerpt }}
+                                {{ $post.Params.excerpt }}
+                            {{ else if $post.Summary }}
+                                {{ $post.Summary | plainify | safeHTML }}
+                            {{ else if $post.Content }}
+                                {{ $post.Content | plainify | truncate 120 }}
+                            {{ end }}
+                        </p>
+
+                        <p class="article-read">
+                            <a href="{{ $post.Permalink }}" class="read-more" aria-label="Ler {{ $post.Title | safeHTML }}">Ler mais →</a>
+                        </p>
+                    </div>
+                </article>
                 {{ end }}
             </div>
         </div>

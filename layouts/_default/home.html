@@ -4,6 +4,7 @@
     <section class="home-posts" role="region">
       <div class="articles-list" aria-live="polite">
         {{ $posts := where (where .Site.RegularPages "Section" "posts") ".Draft" false }}
+        {{ $posts = $posts.ByDate.Reverse | first 5 }}
         {{ if $posts }}
           {{ range $index, $post := $posts }}
             <article class="article-item" itemscope itemtype="https://schema.org/BlogPosting" aria-labelledby="post-title-{{ $index }}">

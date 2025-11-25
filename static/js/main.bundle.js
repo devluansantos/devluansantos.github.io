@@ -103,62 +103,6 @@
     }
   };
 
-  // themes/app/js/code-copy.js
-  var CodeCopy = class {
-    constructor() {
-      this.observer = null;
-      this.init();
-    }
-    init() {
-      this.addCopyButtons();
-      this.observer = new MutationObserver(() => {
-        this.addCopyButtons();
-      });
-      this.observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-    }
-    addCopyButtons() {
-      const codeBlocks = document.querySelectorAll("pre");
-      codeBlocks.forEach((pre) => {
-        if (pre.querySelector(".copy-code-button")) {
-          return;
-        }
-        const button = document.createElement("button");
-        button.className = "copy-code-button";
-        button.textContent = "Copiar";
-        button.setAttribute("aria-label", "Copiar c\xF3digo");
-        button.addEventListener("click", async () => {
-          const code = pre.querySelector("code") || pre;
-          const text = code.textContent || code.innerText;
-          try {
-            await navigator.clipboard.writeText(text);
-            button.textContent = "Copiado!";
-            button.classList.add("copied");
-            setTimeout(() => {
-              button.textContent = "Copiar";
-              button.classList.remove("copied");
-            }, 2e3);
-          } catch (err) {
-            console.error("Erro ao copiar:", err);
-            button.textContent = "Erro";
-            setTimeout(() => {
-              button.textContent = "Copiar";
-            }, 2e3);
-          }
-        });
-        pre.style.position = "relative";
-        pre.appendChild(button);
-      });
-    }
-    destroy() {
-      if (this.observer) {
-        this.observer.disconnect();
-      }
-    }
-  };
-
   // themes/app/js/lazy-load.js
   var LazyLoad = class {
     constructor() {
@@ -365,7 +309,6 @@
       this.modules.push(
         new Navigation(),
         new SmoothScroll(),
-        new CodeCopy(),
         new LazyLoad(),
         new PWA(),
         new Analytics()

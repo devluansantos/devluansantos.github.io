@@ -1,169 +1,348 @@
 ---
-title: "Configuração de Laboratório: ThinkPad X230 com Fedora Linux"
+
+title: "Estudar Apanhando: Meu Laboratório Real no ThinkPad X230"
 date: 2025-11-23
 draft: true
-description: "Documentação técnica do ambiente de laboratório: hardware, sistema operacional, configurações de segurança e ferramentas utilizadas para análise forense e investigação digital."
+description: "Como transformar um velho ThinkPad em um laboratório de segurança, forense e exploit dev — errando, quebrando e consertando tudo manualmente no caminho."
 keywords:
   - "laboratório forense"
   - "thinkpad x230"
-  - "fedora security"
+  - "fedora linux"
+  - "exploit dev"
+  - "reverse engineering"
   - "linux hardening"
-  - "labs forense digital"
-  - "ambiente de investigação"
 image: "/images/posts/jornada-cyber.png"
+
 ---
 
-## Objetivo
+## Estudar Apanhando
 
-Documentar a configuração do ambiente de laboratório utilizado para análise forense, testes de segurança e investigação digital. Este setup serve como base para procedimentos de hardening, análise de artefatos e validação de técnicas.
+Todo mundo parece amar estudar com máquinas virtuais.
+Eu não.
 
-## Hardware: ThinkPad X230
+VMs são confortáveis demais. Elas escondem exatamente as partes que eu quero aprender: comportamento real do kernel, falhas de drivers, firmware mal-humorado, SSD reclamando, ACPI surtando. Tudo some quando você coloca uma camada de virtualização no meio.
 
-{{< case title="Configuração do Laboratório" impact="Ambiente isolado para testes e análise" date="2024" >}}
-ThinkPad X230 rodando Fedora Linux — estação de trabalho dedicada para laboratório forense.
-{{< /case >}}
+Eu queria ver o sistema quebrando na minha frente.
+Sem almofada.
+Sem snapshot.
+Sem fallback glorioso.
 
-### Especificações Técnicas
+Então decidi montar um laboratório físico. Um de verdade.
+Um ambiente para abrir, desmontar, particionar, ferrar e reconstruir quantas vezes fosse necessário.
 
-- **Modelo**: ThinkPad X230
-- **Processador**: Intel Core i5-3320M
-- **RAM**: 8GB DDR3
-- **Armazenamento**: SSD com criptografia LUKS2
-- **Sistema Operacional**: Fedora Linux (última versão estável)
+E é aqui que entra o herói relutante da história: o ThinkPad X230.
 
-### Justificativa da Escolha
+![ThinkPad X230 aberto sobre a mesa](/images/posts/x230-desk.jpg)
 
-- Modularidade: fácil desmontagem e modificação
-- Compatibilidade: suporte completo a distribuições Linux
-- Isolamento: ambiente dedicado, separado de sistemas de produção
-- Custo-benefício: hardware adequado para testes sem investimento elevado
+---
 
-## Sistema Operacional: Fedora Linux
+## O X230 Que Eu Insisti Em Torturar
 
-### Seleção do Sistema Base
+Você já viu um X230. Ele parece só um notebook velho, mas é praticamente imortal.
+Peças baratas, modular, tudo parafusado — e o mais importante — fácil de quebrar sem peso na consciência.
 
-Fedora foi escolhido por:
+Eu instalei Fedora Linux não porque é “o mais técnico”, nem porque é “o mais amigo do usuário”.
+Fedora ocupa o meio-termo perfeito para um laboratório: moderno o suficiente para te desafiar, e honesto o suficiente para te deixar quebrar o sistema sem tentar te salvar.
 
-- **SELinux**: implementação padrão e ativa, essencial para entender políticas de segurança
-- **Systemd**: gerenciamento moderno de serviços e unidades
-- **Journald**: sistema de logs integrado para auditoria
-- **Kernel moderno**: suporte a recursos recentes de segurança
-- **Repositórios**: acesso a ferramentas atualizadas sem presets de segurança
+Arch Linux te dá controle absoluto.
+OpenBSD te dá uma fortaleza.
+Gentoo te dá um doutorado em paciência.
 
-### Configurações de Segurança
+Fedora te dá a verdade.
 
-#### Criptografia de Disco
+![Fedora Linux desktop](/images/posts/fedora.png)
 
-- **Método**: LUKS2 com Argon2id
-- **Parâmetros**: ajustados para equilíbrio entre segurança e performance
-- **Observação**: configurações extremas podem impactar tempo de boot
+---
 
-#### Hardening do Sistema
+## Primeira Grande Pancada: LUKS2 Indo Longe Demais
 
-- **ASLR**: ativado e configurado
-- **Kernel Lockdown**: modo restritivo habilitado
-- **Mount flags**: `/tmp` com `noexec`, `nosuid`, `nodev`
-- **SELinux**: modo enforcing, políticas customizadas quando necessário
-- **Firewall**: configuração manual via `firewalld`
+Comecei configurando criptografia LUKS2 com Argon2id como se estivesse preparando uma infraestrutura militar.
+O Fedora respondeu com um boot de **quatro minutos**.
 
-### Ferramentas Instaladas
+Quatro.
 
-- Análise de rede: `tcpdump`, `wireshark`, `bettercap`
-- Forense: `volatility`, `autopsy`, `sleuthkit`
-- OSINT: `theHarvester`, `recon-ng`, `maltego`
-- Análise de memória: `volatility`, `rekall`
-- Análise de logs: `logwatch`, `auditd`
+Minutos.
 
-## Metodologia de Trabalho
+Achei que o SSD tinha morrido.
+Achei que tinha configurado o initramfs errado.
+Achei tudo — menos a verdade: eu mesmo tinha sabotado o sistema.
 
-### Ciclo de Aprendizado
+### LUKS2: erro e diagnóstico
 
-1. **Estudo teórico**: fundamentos e documentação
-2. **Reprodução no laboratório**: implementação prática
-3. **Aplicação em CTFs**: validação em cenários controlados
-4. **Documentação**: registro de procedimentos e resultados
+{{< code lang="bash" >}}
+cryptsetup luksFormat /dev/sda2 --type luks2 --pbkdf argon2id --iter-time 2000 --key-size 64
+{{< /code >}}
 
-### Estrutura de Documentação
+Sintoma:
 
-Cada procedimento documentado segue:
+{{< code lang="text" >}}
+A start job is running for Remount Root and Kernel File Systems (3min 40s)
+{{< /code >}}
 
-- **Cenário**: contexto e objetivo
-- **Metodologia**: passos executados
-- **Ferramentas**: software e comandos utilizados
-- **Evidências**: resultados e artefatos coletados
-- **Análise**: correlação e interpretação
-- **Conclusão**: achados técnicos
+Diagnóstico:
+Argon2id consumia tanta memória no initramfs que o boot praticamente travava.
 
-## Configurações Específicas
+### Correção
 
-### Criptografia LUKS2
+{{< code lang="bash" >}}
+cryptsetup benchmark
+cryptsetup luksFormat /dev/sda2 --type luks2 --pbkdf argon2id --iters 4 --mem 65536
+{{< /code >}}
 
-**Problema identificado**: boot lento (4 minutos) devido a parâmetros Argon2id extremos.
+Boot voltou ao normal.
+Lição: segurança sem contexto vira autoflagelação.
 
-**Solução aplicada**: ajuste de parâmetros de derivação de chave para equilíbrio segurança/performance.
+![initramfs boot slow](/images/posts/boot-slow.png)
 
-**Lição aprendida**: segurança sem equilíbrio impacta usabilidade operacional.
+---
 
-### Hardening Linux
+## Segunda Pancada: Quando Quebrei Meu Próprio Sistema
 
-**Configurações aplicadas**:
+Decidi montar `/tmp` com `noexec`.
+Parecia uma boa ideia — por 10 segundos.
 
-- `/etc/fstab`: flags de montagem restritivas
-- Initramfs: configuração para suporte a criptografia
-- Permissões de kernel: restrições via sysctl
-- SELinux: políticas customizadas quando necessário
+Aí quebrei:
 
-**Observações**:
+* compiladores
+* instaladores
+* scripts temporários
+* metade do sistema
 
-- Logs de auditoria SELinux são essenciais para troubleshooting
-- `noexec` em `/tmp` pode quebrar ferramentas que dependem de execução temporária
-- Lockdown Mode do kernel restringe modificações em runtime
+### Erro real
 
-### Análise de Redes
+{{< code lang="text" >}}
+/tmp/ccW3x4wq: cannot execute binary file
+configure: error: cannot run C compiled programs.
+{{< /code >}}
 
-**Metodologia**:
+auditd confirmou a burrada:
 
-- Captura de tráfego via `tcpdump` e `wireshark`
-- Análise de handshakes WPA2
-- Captura de beacon frames em modo monitor
-- Estudo de frames 802.11
+{{< code lang="text" >}}
+avc:  denied  { execute } for comm="configure" name="ccW3x4wq"
+{{< /code >}}
 
-**Ferramentas utilizadas**: `airodump-ng`, `kismet`, `bettercap`
+### Correção sensata
 
-## Validação e Testes
+{{< code lang="bash" >}}
+mkdir -p /var/tmp/build
+mount -o remount,exec /var/tmp/build
+cd /var/tmp/build && ./configure && make
+{{< /code >}}
 
-### CTFs e Laboratórios
+Hardening não é seguir receita.
+É entender o bisturi antes de cortar.
 
-- **TryHackMe**: base teórica e prática
-- **Hack The Box**: cenários realistas
-- **CTFs**: validação de metodologias
+![SELinux log](/images/posts/selinux-log.png)
 
-### Processo de Validação
+---
 
-1. Estudo do cenário
-2. Execução no laboratório
-3. Documentação de procedimentos
-4. Análise de resultados
-5. Refinamento de metodologia
+## Quando Percebi que Precisava de Ferramentas de Gente Grande
 
-## Manutenção e Atualização
+Depois de reconstruir o sistema tantas vezes que perdi a conta, ficou claro que eu precisava de ferramentas guiadas por necessidade real.
 
-### Rotina de Manutenção
+Na rede:
+`tcpdump` mostrou o caos bruto.
+Wireshark traduziu o caos.
+Bettercap mostrou como interferir no caos.
 
-- Atualização de sistema: semanal
-- Atualização de ferramentas: conforme necessidade
-- Backup de configurações: antes de mudanças significativas
-- Documentação: atualização contínua
+Forense:
+`sleuthkit`, `autopsy`, `volatility`, `rekall`.
 
-### Backup
+OSINT:
+theHarvester, recon-ng, Maltego.
 
-- Configurações críticas versionadas
-- Scripts de automação documentados
-- Logs de auditoria arquivados
+Auditoria:
+auditd — a ferramenta que te mostra a verdade que você preferia não ver.
 
-## Referências Técnicas
+![Wireshark screenshot](/images/posts/wireshark.png)
 
-- Documentação oficial do Fedora
-- Manuais de ferramentas utilizadas
-- RFCs relevantes para protocolos analisados
-- Documentação de segurança do kernel Linux
+---
+
+## A Memória: Onde a Mentira Evapora
+
+Heap, stack, mmap, relocations.
+Se você quer explorar binários, tem que parar de chutar e começar a olhar dumps de memória.
+
+Volatility e Rekall viraram rotina.
+
+![Volatility UI](/images/posts/volatility.png)
+
+---
+
+## Reverse Engineering: Onde o Binário Conta a Verdade
+
+Eu queria entender o que o binário pensa.
+Não o que o código-fonte promete.
+
+Ghidra virou meu RE principal.
+radare2 quando quero sofrer.
+Binary Ninja quando quero conforto.
+
+### Quando o Ghidra explodiu
+
+{{< code lang="text" >}}
+java.lang.OutOfMemoryError: Java heap space
+{{< /code >}}
+
+Correção:
+
+{{< code lang="bash" >}}
+export GHIDRA_JAVA_OPTIONS="-Xmx4G -Xms1G -XX:+UseG1GC"
+./ghidraRun
+{{< /code >}}
+
+![Ghidra screenshot](/images/posts/ghidra.png)
+
+---
+
+## Debuggers: Acendendo a Luz no Quarto Escuro
+
+gdb + pwndbg/gef é meu ritual.
+lldb quando o binário veio do clang.
+strace/ltrace para ver a verdade acontecendo.
+rr para voltar no tempo.
+
+### Exemplo real
+
+{{< code lang="text" >}}
+SIGSEGV at 0x7fffdeadbeef
+{{< /code >}}
+
+gdb:
+
+{{< code lang="gdb" >}}
+0x5555555546f2 in process_chunk() at vuln.c:128
+*((uint64_t*)ptr) = value; // write past boundary
+{{< /code >}}
+
+![pwndbg screenshot](/images/posts/pwndbg.png)
+
+---
+
+## Exploit Development: O Ponto Sem Retorno
+
+pwntools, ROPgadget, one_gadget, checksec, pwninit.
+O kit básico de quem decide que “vulnerabilidade” é só outra palavra para “possibilidade”.
+
+---
+
+## Fuzzing: Quando o Caos Encontra o Acaso
+
+AFL++, Hongfuzz e libFuzzer encontraram erros que eu jamais encontraria manualmente.
+
+### Quando AFL++ travou
+
+{{< code lang="text" >}}
+paths_total: 1
+[!] The queue cycle took a long time but produced nothing new.
+{{< /code >}}
+
+Correção:
+
+{{< code lang="bash" >}}
+CFLAGS="-O2 -fno-omit-frame-pointer -g" afl-clang-fast -o target target.c
+{{< /code >}}
+
+![AFL run](/images/posts/afl-run.png)
+
+---
+
+## Heap: Onde Morre a Sanidade Humana
+
+Eu achava que entendia heap.
+Não entendia nada.
+
+Heaptrack, libheap, ptmalloc scripts.
+
+### Valgrind mostrando a verdade
+
+{{< code lang="text" >}}
+Invalid write of size 8
+Address ... is after a block of size 16
+{{< /code >}}
+
+---
+
+## Outras Arquiteturas: ARM, MIPS, RISC-V
+
+Rodar coisas sob qemu muda completamente sua expectativa do que um binário deveria fazer. Cada arquitetura traz sua dose de caos e elegância.
+
+ARM tem seus humores.
+MIPS adora te punir por assumir demais.
+RISC-V é quase terapêutico depois de uma semana mexendo com ptmalloc.
+
+Compilar, portar e rodar nesses ambientes me mostrou como pequenos detalhes mudam tudo: alinhamento, registradores, convenções de chamada, offsets, tamanhos.
+
+{{< code lang="bash" >}}
+qemu-arm -L /usr/arm-linux-gnueabihf ./program
+qemu-mips -L /usr/mips-linux-gnu ./program
+{{< /code >}}
+
+É outro mundo — e dominar isso abre muitas portas.
+
+---
+
+## Toolchains e Sanitizers: Quando o ASan Decide Te Odiar
+
+Sanitizers são incríveis… quando funcionam. Quando não funcionam, você perde a fé temporariamente na computação.
+
+### Erro real
+
+{{< code lang="text" >}}
+ASan runtime does not come first
+Aborted (core dumped)
+{{< /code >}}
+
+Geralmente isso acontece por incompatibilidade entre runtime, glibc e binário.
+
+### Correção temporária (para debugging)
+
+{{< code lang="bash" >}}
+echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
+{{< /code >}}
+
+E recompilar tudo com consistência:
+
+{{< code lang="bash" >}}
+clang -fsanitize=address -g -O1 program.c -o program
+{{< /code >}}
+
+Nunca confie cegamente nos sanitizers. Eles são úteis, mas temperamentais.
+
+---
+
+## Vim Cru — Sem Plugins, Sem Ajuda
+
+Usei Vim puro. Nenhum plugin. Nenhuma configuração que escondesse minha incompetência.
+
+Por quê?
+
+Porque se eu consigo trabalhar assim, eu consigo trabalhar em qualquer servidor quebrado do mundo.
+Sem LSP. Sem autocomplete. Sem conforto.
+
+É brutal, mas ensina disciplina.
+
+{{< code lang="text" >}}
+:set number
+:set tabstop=4
+:q!
+{{< /code >}}
+
+Se você sabe usar Vim cru, você abre qualquer arquivo em qualquer ambiente — mesmo quando tudo está pegando fogo.
+
+---
+
+## Conclusão
+
+Esse laboratório não nasceu pronto. Ele nasceu do caos — e da minha insistência em aprender quebrando tudo primeiro.
+
+O Fedora não me abraçou. Ele me mostrou os erros de frente.
+O X230 aguentou pancada atrás de pancada.
+E eu aprendi mais destruindo e reconstruindo sistemas do que em qualquer tutorial polido.
+
+Se você realmente quer aprender segurança, baixo nível, RE, exploit dev… crie um ambiente onde o erro dói.
+
+Porque ele ensina.
+
+**A melhor forma de aprender é errando.
+A segunda melhor é errar de novo — mas com mais estilo.**

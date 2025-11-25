@@ -146,39 +146,6 @@ pre {
     z-index: 10;
 }
 
-pre:hover .copy-code-button {
-    opacity: 1;
-}
-
-.copy-code-button:hover {
-    background-color: var(--ui-high-contrast);
-    border-color: var(--ui-high-contrast);
-    color: var(--bg-color);
-}
-
-.copy-code-button:active {
-    background-color: var(--text-secondary-strong);
-    border-color: var(--text-secondary-strong);
-    color: var(--bg-color);
-}
-
-.copy-code-button.copied {
-    background-color: var(--bg-light);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-[data-theme="dark"] .copy-code-button {
-    background-color: var(--bg-light);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-[data-theme="dark"] .copy-code-button:hover {
-    background-color: var(--ui-high-contrast);
-    border-color: var(--ui-high-contrast);
-    color: var(--bg-color);
-}
 
 /* Code Block Styling - High specificity to override syntax highlighting */
 :root:not([data-theme="dark"]) pre,
@@ -224,7 +191,6 @@ html[data-theme="dark"] pre,
     font-family: var(--font-mono);
     background-color: var(--bg-code);
     border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-md);
 }
 
 .terminal-header {
@@ -289,7 +255,7 @@ html[data-theme="dark"] pre,
 
 .terminal-pre {
     margin: 0 !important;
-    padding: calc(var(--spacing-unit) * 1.5) !important;
+    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1) !important;
     border: none !important;
     border-radius: 0 !important;
     font-size: 0.9rem !important;
@@ -313,7 +279,6 @@ html[data-theme="dark"] pre,
 [data-theme="dark"] .terminal-wrapper {
     background-color: var(--bg-code) !important;
     border-color: var(--border-color) !important;
-    box-shadow: var(--shadow-md) !important;
 }
 
 [data-theme="dark"] .terminal-header {
@@ -581,26 +546,31 @@ html[data-theme="dark"] pre,
     }
     
     .article-item {
-        flex-direction: column;
-        gap: calc(var(--spacing-unit) * 0.25);
-        padding: calc(var(--spacing-unit) * 0.25) 0;
+        flex-direction: row;
+        gap: calc(var(--spacing-unit) * 1);
+        padding: calc(var(--spacing-unit) * 0.75) 0;
+    }
+    
+    .article-item:hover {
+        padding-left: calc(var(--spacing-unit) * 0.25);
     }
     
     .article-date {
-        min-width: auto;
+        min-width: 70px;
         font-size: 0.8125rem;
+        text-align: right;
     }
     
     .article-link {
-        font-size: 16px;
+        font-size: 0.9375rem;
     }
     
     .articles-year-list {
-        gap: calc(var(--spacing-unit) * 4);
+        gap: calc(var(--spacing-unit) * 3);
     }
     
     .year-title {
-        font-size: 1.75rem;
+        font-size: 1rem;
     }
     
     .articles-title {

@@ -381,7 +381,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: calc(var(--spacing-unit) * 1);
+    gap: calc(var(--spacing-unit) * 0.75);
     flex-wrap: wrap;
     margin-bottom: calc(var(--spacing-unit) * 1.5);
 }
@@ -389,12 +389,15 @@
 .pagination-link {
     display: inline-flex;
     align-items: center;
-    gap: calc(var(--spacing-unit) * 0.5);
-    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.25);
+    justify-content: center;
+    gap: calc(var(--spacing-unit) * 0.375);
+    min-width: 28px;
+    height: 28px;
+    padding: 0 calc(var(--spacing-unit) * 0.5);
     background-color: var(--bg-light);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text-color);
     text-decoration: none;
@@ -431,13 +434,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 36px;
-    height: 36px;
-    padding: 0 calc(var(--spacing-unit) * 0.75);
+    min-width: 28px;
+    height: 28px;
+    padding: 0 calc(var(--spacing-unit) * 0.5);
     background-color: var(--bg-light);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 500;
     color: var(--text-color);
     text-decoration: none;
@@ -478,14 +481,16 @@
     }
     
     .pagination-link {
-        padding: calc(var(--spacing-unit) * 0.625) calc(var(--spacing-unit) * 1);
-        font-size: 0.8rem;
+        min-width: 26px;
+        height: 26px;
+        padding: 0 calc(var(--spacing-unit) * 0.375);
+        font-size: 0.75rem;
     }
     
     .pagination-page {
-        min-width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
+        min-width: 26px;
+        height: 26px;
+        font-size: 0.75rem;
     }
 }
 
@@ -611,7 +616,7 @@
 }
 
 .expand {
-    margin: calc(var(--spacing-unit) * 2) 0;
+    margin: calc(var(--spacing-unit) * 1) 0;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--bg-light);
@@ -620,7 +625,7 @@
 }
 
 .expand-summary {
-    padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5);
+    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1);
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
@@ -650,7 +655,7 @@
 }
 
 .expand-content {
-    padding: calc(var(--spacing-unit) * 1.5);
+    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1);
     color: var(--text-color);
     font-size: 0.95rem;
     line-height: 1.7;
@@ -776,12 +781,12 @@
 }
 
 [data-theme="dark"] .expand {
-    background-color: rgba(31, 41, 55, 0.5);
+    background-color: var(--bg-light);
     border-color: var(--border-color);
 }
 
 [data-theme="dark"] .expand-summary {
-    background-color: rgba(17, 24, 39, 0.8);
+    background-color: var(--bg-color);
 }
 
 [data-theme="dark"] .osint {
@@ -1007,7 +1012,7 @@
 .articles-list {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--spacing-unit) * 0.5);
+    gap: calc(var(--spacing-unit) * 0.75);
     max-width: 750px;
     margin-left: auto;
     margin-right: auto;
@@ -1015,15 +1020,27 @@
 
 .article-item {
     display: flex;
-    align-items: baseline;
-    gap: calc(var(--spacing-unit) * 1);
-    padding: calc(var(--spacing-unit) * 0.25) 0;
+    align-items: flex-start;
+    gap: calc(var(--spacing-unit) * 1.5);
+    padding: calc(var(--spacing-unit) * 0.75) 0;
     opacity: 1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.article-item:last-child {
+    border-bottom: none;
+}
+
+.article-item:hover {
+    padding-left: calc(var(--spacing-unit) * 0.5);
 }
 
 .article-meta {
     flex-shrink: 0;
     min-width: 100px;
+    display: flex;
+    align-items: flex-start;
 }
 
 .article-body {
@@ -1084,27 +1101,31 @@
 .article-date {
     font-size: 0.875rem;
     color: var(--text-light);
-    font-family: var(--font-content-text);
-    min-width: 120px;
+    font-family: var(--font-mono);
+    min-width: 80px;
     flex-shrink: 0;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.01em;
+    text-align: right;
+    line-height: 1.4;
+    padding-top: 0.1em;
 }
 
 .article-link {
     color: var(--text-color);
     text-decoration: none;
-    font-size: 1.125rem;
+    font-size: 1rem;
     transition: var(--transition);
     flex: 1;
-    font-weight: 400;
-    line-height: 1.6;
+    font-weight: 500;
+    line-height: 1.5;
     font-family: var(--font-content-text);
+    display: block;
 }
 
 .article-link:hover,
 .article-link:focus {
-    color: var(--text-heading);
+    color: var(--primary-color);
     text-decoration: none;
 }
 
@@ -1120,9 +1141,14 @@
 .year-group {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--spacing-unit) * 2);
+    gap: calc(var(--spacing-unit) * 1.5);
     opacity: 1;
     transition: opacity 0.3s ease;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.year-group:last-child {
+    margin-bottom: 0;
 }
 
 .article-card {
@@ -1131,16 +1157,18 @@
 }
 
 .year-title {
-    font-size: 2rem;
+    font-size: 1.125rem;
     font-weight: 600;
-    color: var(--text-heading);
-    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    color: var(--text-light);
+    margin-bottom: calc(var(--spacing-unit) * 1);
     margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: -0.01em;
-    font-family: var(--font-content-display);
-    max-width: 750px;
+    margin-left: 0;
+    margin-right: 0;
+    letter-spacing: 0.05em;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    padding-bottom: calc(var(--spacing-unit) * 0.75);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .articles-cards {
@@ -1390,5 +1418,15 @@
 .post-single,
 .page-single {
     padding: calc(var(--spacing-unit) * 1.5) 0;
+}
+
+[data-theme="dark"] .article-item {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .article-item {
+        border-bottom-color: rgba(255, 255, 255, 0.04);
+    }
 }
 
