@@ -1,0 +1,25 @@
+<header class="site-header" role="banner">
+    <div class="header-container">
+        <div class="header-brand">
+            <a href="{{ "/" | relURL }}" class="brand-link" aria-label="Ir para página inicial">
+                <span class="brand-text">{{ .Site.Title }}</span>
+            </a>
+        </div>
+        <div class="header-actions">
+            <nav class="header-nav" role="navigation" aria-label="Navegação principal">
+                <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                    <span class="nav-toggle-icon"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <ul class="nav-menu" id="main-menu">
+                    {{ range .Site.Menus.main }}
+                    <li class="nav-item">
+                        <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+

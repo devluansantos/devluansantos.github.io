@@ -29,15 +29,3 @@ new: ## Cria um novo post (use: make new POST=nome-do-post)
 	@hugo new posts/$(POST).md
 	@echo "Post criado em content/posts/$(POST).md"
 
-test: ## Executa testes unitários
-	@echo "Executando testes unitários..."
-	@npm run test || echo "⚠️  Tests skipped (vitest not installed)"
-
-test-e2e: ## Executa testes E2E
-	@echo "Executando testes E2E..."
-	@npm run test:e2e || echo "⚠️  E2E tests skipped (playwright not installed)"
-
-test-coverage: ## Executa testes com cobertura
-	@echo "Executando testes com cobertura..."
-	@npm run test:coverage || echo "⚠️  Coverage tests skipped (vitest not installed)"
-
