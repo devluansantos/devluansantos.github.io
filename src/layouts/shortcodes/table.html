@@ -1,9 +1,0 @@
-{{- $content := .Inner | markdownify -}}
-{{- $content = $content | replaceRE `<table>` `<table class="content-table">` -}}
-{{- $content = $content | replaceRE `<script[^>]*>.*?</script>` `` -}}
-{{- $content = $content | replaceRE `<iframe[^>]*>.*?</iframe>` `` -}}
-{{- $content = $content | replaceRE `on\w+\s*=\s*["'][^"']*["']` `` -}}
-<div class="table-wrapper">
-    {{- $content | safeHTML -}}
-</div>
-

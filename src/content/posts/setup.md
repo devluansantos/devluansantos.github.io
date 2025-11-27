@@ -69,25 +69,25 @@ Achei tudo — menos a verdade: eu mesmo tinha sabotado o sistema.
 
 ### LUKS2: erro e diagnóstico
 
-{{< code lang="bash" >}}
+```bash
 cryptsetup luksFormat /dev/sda2 --type luks2 --pbkdf argon2id --iter-time 2000 --key-size 64
-{{< /code >}}
+```
 
 Sintoma:
 
-{{< code lang="text" >}}
+```text
 A start job is running for Remount Root and Kernel File Systems (3min 40s)
-{{< /code >}}
+```
 
 Diagnóstico:
 Argon2id consumia tanta memória no initramfs que o boot praticamente travava.
 
 ### Correção
 
-{{< code lang="bash" >}}
+```bash
 cryptsetup benchmark
 cryptsetup luksFormat /dev/sda2 --type luks2 --pbkdf argon2id --iters 4 --mem 65536
-{{< /code >}}
+```
 
 Boot voltou ao normal.
 Lição: segurança sem contexto vira autoflagelação.
@@ -108,26 +108,26 @@ Aí quebrei:
 * scripts temporários
 * metade do sistema
 
-### Erro real
+### Erro real: `/tmp` noexec
 
-{{< code lang="text" >}}
+```text
 /tmp/ccW3x4wq: cannot execute binary file
 configure: error: cannot run C compiled programs.
-{{< /code >}}
+```
 
 auditd confirmou a burrada:
 
-{{< code lang="text" >}}
+```text
 avc:  denied  { execute } for comm="configure" name="ccW3x4wq"
-{{< /code >}}
+```
 
 ### Correção sensata
 
-{{< code lang="bash" >}}
+```bash
 mkdir -p /var/tmp/build
 mount -o remount,exec /var/tmp/build
 cd /var/tmp/build && ./configure && make
-{{< /code >}}
+```
 
 Hardening não é seguir receita.
 É entender o bisturi antes de cortar.
@@ -180,16 +180,16 @@ Binary Ninja quando quero conforto.
 
 ### Quando o Ghidra explodiu
 
-{{< code lang="text" >}}
+```text
 java.lang.OutOfMemoryError: Java heap space
-{{< /code >}}
+```
 
 Correção:
 
-{{< code lang="bash" >}}
+```bash
 export GHIDRA_JAVA_OPTIONS="-Xmx4G -Xms1G -XX:+UseG1GC"
 ./ghidraRun
-{{< /code >}}
+```
 
 ![Ghidra screenshot](/images/posts/ghidra.png)
 
@@ -204,16 +204,16 @@ rr para voltar no tempo.
 
 ### Exemplo real
 
-{{< code lang="text" >}}
+```text
 SIGSEGV at 0x7fffdeadbeef
-{{< /code >}}
+```
 
 gdb:
 
-{{< code lang="gdb" >}}
+```gdb
 0x5555555546f2 in process_chunk() at vuln.c:128
 *((uint64_t*)ptr) = value; // write past boundary
-{{< /code >}}
+```
 
 ![pwndbg screenshot](/images/posts/pwndbg.png)
 
@@ -232,16 +232,16 @@ AFL++, Hongfuzz e libFuzzer encontraram erros que eu jamais encontraria manualme
 
 ### Quando AFL++ travou
 
-{{< code lang="text" >}}
+```text
 paths_total: 1
 [!] The queue cycle took a long time but produced nothing new.
-{{< /code >}}
+```
 
 Correção:
 
-{{< code lang="bash" >}}
+```bash
 CFLAGS="-O2 -fno-omit-frame-pointer -g" afl-clang-fast -o target target.c
-{{< /code >}}
+```
 
 ![AFL run](/images/posts/afl-run.png)
 
@@ -256,10 +256,10 @@ Heaptrack, libheap, ptmalloc scripts.
 
 ### Valgrind mostrando a verdade
 
-{{< code lang="text" >}}
+```text
 Invalid write of size 8
 Address ... is after a block of size 16
-{{< /code >}}
+```
 
 ---
 
@@ -273,10 +273,10 @@ RISC-V é quase terapêutico depois de uma semana mexendo com ptmalloc.
 
 Compilar, portar e rodar nesses ambientes me mostrou como pequenos detalhes mudam tudo: alinhamento, registradores, convenções de chamada, offsets, tamanhos.
 
-{{< code lang="bash" >}}
+```bash
 qemu-arm -L /usr/arm-linux-gnueabihf ./program
 qemu-mips -L /usr/mips-linux-gnu ./program
-{{< /code >}}
+```
 
 É outro mundo — e dominar isso abre muitas portas.
 
@@ -286,26 +286,26 @@ qemu-mips -L /usr/mips-linux-gnu ./program
 
 Sanitizers são incríveis… quando funcionam. Quando não funcionam, você perde a fé temporariamente na computação.
 
-### Erro real
+### Erro real: ASan
 
-{{< code lang="text" >}}
+```text
 ASan runtime does not come first
 Aborted (core dumped)
-{{< /code >}}
+```
 
 Geralmente isso acontece por incompatibilidade entre runtime, glibc e binário.
 
 ### Correção temporária (para debugging)
 
-{{< code lang="bash" >}}
+```bash
 echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
-{{< /code >}}
+```
 
 E recompilar tudo com consistência:
 
-{{< code lang="bash" >}}
+```bash
 clang -fsanitize=address -g -O1 program.c -o program
-{{< /code >}}
+```
 
 Nunca confie cegamente nos sanitizers. Eles são úteis, mas temperamentais.
 
@@ -322,11 +322,11 @@ Sem LSP. Sem autocomplete. Sem conforto.
 
 É brutal, mas ensina disciplina.
 
-{{< code lang="text" >}}
+```text
 :set number
 :set tabstop=4
 :q!
-{{< /code >}}
+```
 
 Se você sabe usar Vim cru, você abre qualquer arquivo em qualquer ambiente — mesmo quando tudo está pegando fogo.
 

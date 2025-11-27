@@ -4,15 +4,10 @@
         <header class="post-header">
             <h1 class="post-title" itemprop="headline">{{ .Title }}</h1>
             {{ if .Lastmod }}
-            <div class="post-meta">
-                <time datetime="{{ .Lastmod.Format " 2006-01-02" }}" class="post-date-updated">
-                    Luan Santos - {{ .Lastmod.Format "02/01/2006" }}
-                </time>
-            </div>
             {{ end }}
         </header>
 
-        <div class="post-content" itemprop="articleBody">
+        <div class="post-content markdown-body" itemprop="articleBody">
             {{ .Content }}
         </div>
 

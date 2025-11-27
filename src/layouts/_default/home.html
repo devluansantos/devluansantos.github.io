@@ -2,44 +2,98 @@
 <main id="main-content" role="main">
   <div class="container" lang="pt-BR">
     <section class="home-posts" role="region">
-      <div class="articles-list" aria-live="polite">
-        {{ $posts := where (where .Site.RegularPages "Section" "posts") ".Draft" false }}
-        {{ $posts = $posts.ByDate.Reverse | first 5 }}
-        {{ if $posts }}
-          {{ range $index, $post := $posts }}
-            <article class="article-item" itemscope itemtype="https://schema.org/BlogPosting" aria-labelledby="post-title-{{ $index }}">
-              <header class="article-meta">
-                <time datetime="{{ $post.Date.Format "2006-01-02" }}" class="article-date" itemprop="datePublished">{{ $post.Date.Format "2006-01-02" }}</time>
-              </header>
+      <div class="articles-year-list">
+        <div class="year-group" data-year="2025">
+          <h2 class="year-title">2025</h2>
+          <div class="articles-list" aria-live="polite">
+            {{ $posts := where (where .Site.RegularPages "Section" "posts") ".Draft" false }}
+            {{ $sorted := $posts.ByDate.Reverse }}
+            {{ $paginator := .Paginate $sorted }}
 
-              <div class="article-body">
-                <h2 id="post-title-{{ $index }}" class="article-title" itemprop="headline">
-                  <a href="{{ $post.Permalink }}" class="article-link" itemprop="url">{{ $post.Title }}</a>
-                </h2>
+            {{ if $paginator.Pages }}
+              {{ range $index, $post := $paginator.Pages }}
+                <article class="article-item" itemscope itemtype="https://schema.org/BlogPosting" aria-labelledby="post-title-{{ $index }}">
+                  <header class="article-meta">
+                    <time datetime="{{ $post.Date.Format "2006-01-02" }}" class="article-date" itemprop="datePublished">{{ $post.Date.Format "2006-01-02" }}</time>
+                  </header>
 
-                <!-- resumo: prioriza .Params.excerpt, senão .Summary, senão truncamento simples -->
-                <p class="article-excerpt" itemprop="description">
-                  {{ if $post.Params.excerpt }}
-                    {{ $post.Params.excerpt }}
-                  {{ else if $post.Summary }}
-                    {{ $post.Summary | plainify | safeHTML }}
-                  {{ else if $post.Content }}
-                    {{ $post.Content | plainify | truncate 120 }}
+                  <div class="article-body">
+                    <h2 id="post-title-{{ $index }}" class="article-title" itemprop="headline">
+                      <a href="{{ $post.Permalink }}" class="article-link" itemprop="url">{{ $post.Title }}</a>
+                    </h2>
+
+                    <!-- resumo: prioriza .Params.excerpt, senão .Summary, senão truncamento simples -->
+                    <p class="article-excerpt" itemprop="description">
+                      {{ if $post.Params.excerpt }}
+                        {{ $post.Params.excerpt }}
+                      {{ else if $post.Summary }}
+                        {{ $post.Summary | plainify | safeHTML }}
+                      {{ else if $post.Content }}
+                        {{ $post.Content | plainify | truncate 120 }}
+                      {{ end }}
+                    </p>
+
+                    <p class="article-read">
+                      <a href="{{ $post.Permalink }}" class="read-more" aria-label="Ler {{ $post.Title }}">Ler mais →</a>
+                    </p>
+                  </div>
+                </article>
+              {{ end }}
+            {{ else }}
+              <p class="home-empty-state">Nenhuma documentação disponível no momento.</p>
+            {{ end }}
+          </div>
+
+          {{ if gt $paginator.TotalPages 1 }}
+            <nav class="pagination" aria-label="Navegação de páginas">
+              <div class="pagination-wrapper">
+                {{ if $paginator.HasPrev }}
+                  <a href="{{ $paginator.Prev.URL }}" class="pagination-link pagination-prev" aria-label="Página anterior">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                  </a>
+                {{ else }}
+                  <span class="pagination-link pagination-prev pagination-disabled" aria-disabled="true">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                  </span>
+                {{ end }}
+
+                <div class="pagination-pages">
+                  {{ range $paginator.Pagers }}
+                    {{ if eq .PageNumber $paginator.PageNumber }}
+                      <span class="pagination-page pagination-current" aria-current="page">{{ .PageNumber }}</span>
+                    {{ else }}
+                      <a href="{{ .URL }}" class="pagination-page" aria-label="Página {{ .PageNumber }}">{{ .PageNumber }}</a>
+                    {{ end }}
                   {{ end }}
-                </p>
+                </div>
 
-                <p class="article-read">
-                  <a href="{{ $post.Permalink }}" class="read-more" aria-label="Ler {{ $post.Title }}">Ler mais →</a>
-                </p>
+                {{ if $paginator.HasNext }}
+                  <a href="{{ $paginator.Next.URL }}" class="pagination-link pagination-next" aria-label="Próxima página">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                {{ else }}
+                  <span class="pagination-link pagination-next pagination-disabled" aria-disabled="true">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </span>
+                {{ end }}
               </div>
-            </article>
+              <div class="pagination-info">
+                <span>Página {{ $paginator.PageNumber }} de {{ $paginator.TotalPages }}</span>
+              </div>
+            </nav>
           {{ end }}
-        {{ else }}
-          <p class="home-empty-state">Nenhuma documentação disponível no momento.</p>
-        {{ end }}
+
+        </div>
       </div>
     </section>
-
   </div>
 </main>
 {{ end }}

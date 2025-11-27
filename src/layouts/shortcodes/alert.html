@@ -1,9 +1,0 @@
-<div class="alert" data-type="{{ .Get "type" | default "info" }}">
-    {{ if .Get "title" }}
-    <div class="alert-title">{{ .Get "title" }}</div>
-    {{ end }}
-    <div class="alert-content">
-        {{ .Inner | markdownify }}
-    </div>
-</div>
-

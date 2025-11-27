@@ -1,9 +1,0 @@
-<div class="osint">
-    {{ if .Get "title" }}
-    <div class="osint-title">{{ .Get "title" }}</div>
-    {{ end }}
-    <div class="osint-content">
-        {{ .Inner | markdownify }}
-    </div>
-</div>
-

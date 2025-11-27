@@ -1,10 +1,10 @@
 baseURL = 'https://luansantosme.github.io/'
 languageCode = 'pt-br'
-title = 'luansantosme'
+title = 'Luan Santos'
 contentDir = 'src/content'
 layoutDir = 'src/layouts'
 staticDir = ['src/static']
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 taxonomies = {}
 
 # Configurações de produção
@@ -27,12 +27,6 @@ taxonomies = {}
   name = "Home"
   url = "/"
   weight = 1
-
-[[menu.main]]
-  identifier = "articles"
-  name = "Articles"
-  url = "/posts/"
-  weight = 2
 
 [[menu.main]]
   identifier = "about"
