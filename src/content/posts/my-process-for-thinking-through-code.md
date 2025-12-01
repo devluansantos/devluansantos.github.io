@@ -1,7 +1,7 @@
 ---
 title: "Meu processo de pensar em código"
 date: 2025-11-26T10:00:00-03:00
-draft: false
+draft: true
 description: "Como escrever código no papel virou parte essencial do meu processo como desenvolvedor."
 ---
 
