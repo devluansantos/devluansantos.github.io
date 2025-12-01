@@ -2,7 +2,7 @@
 title: "Estudar Apanhando: Meu Laboratório Real no ThinkPad X230"
 slug: "thinkpad-x230-lab-forense-linux"
 date: 2025-11-23
-draft: false
+draft: true
 summary: "Abandonei as VMs para sofrer no hardware real. Como transformar um velho ThinkPad em um laboratório de segurança, forense e exploit dev — errando, quebrando e consertando tudo manualmente."
 categories:
   - "Hardening"
