@@ -2,39 +2,38 @@
 title: "Sobre"
 date: 2025-11-24
 draft: false
-description: "Anotações técnicas sobre análise forense, OSINT e investigação digital. Procedimentos, experimentos e reconstruções."
+description: "Anotações técnicas sobre Web Hacking, Pentest e segurança ofensiva. POCs, bypasses e análise de vulnerabilidades."
 ---
 
 ## Sobre este site
 
-Este site funciona como um repositório técnico pessoal.  
-É onde documento **processos, evidências, experimentos, reconstruções, metodologias** e qualquer coisa que faça sentido preservar para uso futuro.
+Sou **Desenvolvedor Frontend** de ofício.  
+Enquanto meu trabalho principal envolve construir interfaces e arquitetura, este site é minha bancada para o inverso: **entender como aplicações quebram, explorar falhas lógicas e testar a segurança do que construímos.**
 
-O foco é simples:  
-**entender sistemas, quebrar comportamentos opacos e registrar procedimentos que possam ser repetidos ou auditados.**
+Funciona como um repositório técnico pessoal (um *Second Brain*) onde documento estudos e vetores de ataque. O foco é simples: sair da teoria e registrar a prática.
 
 Aqui entram:
 
-- análises forenses,
-- coleta e correlação de artefatos,
-- investigações OSINT,
-- reconstrução de eventos,
-- falhas operacionais,
-- scripts e rotinas auxiliares,
+- exploração de vulnerabilidades client-side (XSS, DOM Clobbering, Prototype Pollution),
+- manipulação de lógica de negócio,
+- testes ofensivos em APIs e quebra de controle de acesso (IDOR),
+- bypass de validações e filtros (WAF),
+- análise de código JavaScript e engenharia reversa de frontends,
+- scripts de automação para recon,
 - padrões que emergem depois de errar o suficiente.
 
-Nada aqui representa empregadores ou organizações. É trabalho independente, orientado a método e curiosidade — não opinião.
+Nada aqui representa empregadores ou organizações. É trabalho independente, orientado a método e curiosidade.
 
 ---
 
 ## Contato
 
-Se quiser trocar ideias, discutir metodologia ou revisar pesquisa, envie um e-mail:  
-[**santos.luan@proton.me**](mailto:santos.luan@proton.me)
+Se quiser trocar ideia sobre algum vetor de ataque, sugerir correções ou só bater um papo sobre segurança, envie um e-mail:  
+[**luansrodrigues@proton.me**](mailto:luansrodrigues@proton.me)
 
 ---
 
 ## Nota
 
-Todo conteúdo é voltado para **estudo, pesquisa e ambientes controlados**.  
-Procedimentos de investigação devem ser aplicados **somente** com autorização adequada e dentro do escopo legal.
+Todo conteúdo é voltado estritamente para **estudo, laboratório e ambientes controlados**.  
+Procedimentos de ataque devem ser aplicados **somente** com autorização adequada (escopo de pentest ou Bug Bounty) e dentro da legalidade.

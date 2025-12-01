@@ -1,0 +1,185 @@
+/* === ChatGPT-like Chroma theme (light) ===
+   Colar em src/static/css/chroma-chatgpt.css
+   Requer: noClasses = false
+*/
+
+/* Wrapper / Pre */
+.chroma {
+    background: #f7f7f8;
+    /* fundo claro tipo ChatGPT */
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid #e6e9ee;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Fira Code", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: auto;
+    color: #0f1724;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove layout em tabela caso ainda apareça */
+.chroma .lntable {
+    display: block !important;
+}
+
+.chroma .lntd {
+    display: inline-block !important;
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+}
+
+/* Linha e número de linha */
+.chroma .line {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.chroma .ln,
+.chroma .lnt {
+    color: #9ca3af;
+    user-select: none;
+    margin-right: 0.6em;
+    padding: 0 0.4em;
+    font-size: 13px;
+}
+
+/* Highlighted line */
+.chroma .hl {
+    background-color: rgba(124, 58, 237, 0.06);
+    border-radius: 6px;
+}
+
+/* Cores (ajustadas para visual ChatGPT-like) */
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr,
+.chroma .kt {
+    color: #6d28d9;
+    /* roxo keywords */
+}
+
+.chroma .nb,
+.chroma .mf,
+.chroma .m,
+.chroma .mi,
+.chroma .mh {
+    color: #2563eb;
+    /* azul - builtins / números */
+}
+
+.chroma .nf,
+.chroma .nc,
+.chroma .nn {
+    color: #0f766e;
+    /* teal para nomes de função/class */
+}
+
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .sd,
+.chroma .s2 {
+    color: #16a34a;
+    /* verde strings */
+}
+
+.chroma .c,
+.chroma .cm,
+.chroma .c1,
+.chroma .ch,
+.chroma .cs {
+    color: #6b7280;
+    /* comentários, cinza */
+    font-style: italic;
+}
+
+.chroma .p,
+.chroma .o {
+    color: #111827;
+    /* pontuação / operadores */
+}
+
+/* Small tweaks to spacing inside <code> */
+.chroma code {
+    white-space: pre;
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+}
+
+/* Copy button wrapper (se você adicionou o partial/button) */
+.codeblock-wrapper {
+    position: relative;
+    display: block;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+    background: rgba(17, 24, 39, 0.06);
+    color: #0f1724;
+    transition: background .12s ease, transform .08s ease;
+    backdrop-filter: blur(4px);
+}
+
+.copy-btn:hover {
+    background: rgba(17, 24, 39, 0.10);
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+.copy-btn.copied {
+    background: #07a55a;
+    color: #fff;
+}
+
+/* Responsividade: remove max-width se quiser ocupar 100% */
+.chroma {
+    max-width: none;
+}
+
+/* Optional: scrollbar styling (subtle) */
+.chroma::-webkit-scrollbar {
+    height: 8px;
+}
+
+.chroma::-webkit-scrollbar-thumb {
+    background: rgba(2, 6, 23, 0.06);
+    border-radius: 8px;
+}
+
+/* Fallback small screens */
+@media (max-width: 640px) {
+    .chroma {
+        padding: 12px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .ln,
+    .lnt {
+        display: none;
+    }
+
+    /* opcional: esconder números em mobile */
+}

@@ -1,6 +1,6 @@
 baseURL = 'https://luansantosme.github.io/'
 languageCode = 'pt-br'
-title = 'Luan Santos'
+title = 'RUIDØR'
 contentDir = 'src/content'
 layoutDir = 'src/layouts'
 staticDir = ['src/static']
@@ -9,21 +9,17 @@ taxonomies = {}
 
 # Configurações de produção
 [params]
-  author = "Luan Santos"
+  author = "RUIDØR"
   description = "Documentação técnica de análise forense, OSINT e investigação digital. Procedimentos, metodologias e resultados de investigações."
   
   # Open Graph e Social Media
   # Imagem padrão para compartilhamento (1200x630px recomendado)
   og_image = "/images/og-default.png"
-  
-  # Twitter
-  twitter_site = "@seu-usuario"  # Seu @ do Twitter (sem @)
-  twitter_creator = "@seu-usuario"  # Seu @ do Twitter para posts
 
 # Configurações de menu
 [[menu.main]]
-  identifier = "home"
-  name = "Home"
+  identifier = "archive"
+  name = "Archive"
   url = "/"
   weight = 1
 
@@ -37,16 +33,16 @@ taxonomies = {}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = false  # Segurança: não permite HTML arbitrário no markdown
+      unsafe = false
   [markup.highlight]
     style = "github"
-    lineNos = true
-    lineNumbersInTable = true
+    lineNos = false
+    lineNumbersInTable = false
     noClasses = false
 
 # Configurações de resumo (summary)
 [summary]
-  length = 150  # Limita o resumo automático a 150 caracteres
+  length = 150
 
 # Configurações de paginação
 [pagination]
@@ -62,25 +58,4 @@ taxonomies = {}
   changefreq = "monthly"
   priority = 0.5
   filename = "sitemap.xml"
-
-# Configurações de comentários
-[params.comments]
-  provider = "giscus"  # "giscus", "utterances", "custom", or "none"
-  
-  [params.comments.giscus]
-    # IMPORTANTE: Para obter os IDs necessários:
-    # 1. Acesse https://giscus.app
-    # 2. Configure com seu repositório GitHub
-    # 3. Habilite Discussions no repositório (Settings > General > Features > Discussions)
-    # 4. Copie o repoId e categoryId gerados
-    repo = "luansantosme/luansantosme.github.io"  # Repositório onde os comentários serão armazenados
-    repoId = ""  # Obtenha em https://giscus.app após configurar
-    category = "Announcements"  # Categoria padrão para discussões
-    categoryId = ""  # Obtenha em https://giscus.app após configurar
-  
-  [params.comments.utterances]
-    repo = ""  # e.g., "username/repo"
-  
-  [params.comments.custom]
-    customHTML = ""  # Custom HTML for comments
 

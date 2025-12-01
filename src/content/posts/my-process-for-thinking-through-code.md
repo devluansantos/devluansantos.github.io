@@ -12,10 +12,14 @@ E, sendo sincero, também porque eu sempre fui **viciado em tela**. Sou daqueles
 
 ### A romantização da faculdade vs. a realidade
 
-Em 2019, entrei em Ciência da Computação na UEPB, eu tinha uma imagem quase romântica:  
-laboratório cheio de computadores, monitor gigante, teclado barulhento, aquele clima de *“estou vivendo programação”*.
+Em 2019, entrei em Ciência da Computação na UEPB, com uma imagem quase romântica da experiência:
 
-A realidade?  
+- Laboratório cheio de computadores
+- Monitores gigantes
+- Teclados barulhentos
+- Aquele clima de *"estou vivendo programação"*
+
+A realidade foi bem diferente.
 
 O professor de Algoritmos fazia a gente **escrever código no papel**.  
 Papel mesmo. Folha A4. Caneta.  
@@ -29,55 +33,53 @@ Era isso que martelava na minha cabeça.
 
 ### O estalo que demorou anos
 
-Essa birra só terminou anos depois, quando esbarrei num artigo do [The Guardian falando sobre os benefícios cognitivos da escrita manual.](https://www.theguardian.com)
+Essa birra só terminou anos depois, quando esbarrei num artigo do [The Guardian falando sobre os benefícios cognitivos da escrita manual](https://www.theguardian.com/news/2025/jan/21/signature-moves-are-we-losing-the-ability-to-write-by-hand).
 
 E aí fez sentido.
 
 O problema nunca foi o papel. **O problema era eu.**
 
-Eu tinha me viciado no conforto do teclado, do editor, do autocomplete…  
-Esqueci como é **pensar devagar**.  
-Pensar *antes*.  
-Pensar *de verdade*.
+Eu tinha me viciado no conforto do teclado, do editor, do autocomplete. Esqueci como é **pensar devagar**. Pensar *antes*. Pensar *de verdade*.
 
-Escrever à mão força isso.  
-Te obriga a organizar a cabeça antes de reagir ao computador.
+Escrever a mão força isso. Te obriga a organizar a cabeça antes de reagir ao computador.
 
 ### O colapso (e a solução) na pós-graduação
 
-![Minha imagem escrita](/images/posts/escrita.png)
+Esse choque voltou com tudo na minha pós-graduação em Cybersecurity.
 
-Esse choque voltou com tudo na minha pós-graduação em Cybersecurity, esse ano.
+Eu precisava criar **uma rotina de detecção de inconsistências em logs**. No editor, virou um caos:
 
-Eu precisava criar *uma rotina de detecção de inconsistências em logs*.  
-No editor, virou um caos: prints, exceções, funções jogadas, lógica espalhada que não se conversava.
+- Prints espalhados
+- Exceções jogadas
+- Funções em lugares aleatórios
+- Lógica fragmentada que não conversava
 
-Fechei o laptop na força da frustração.  
-Peguei o caderno.
+Fechei o laptop na força da frustração. Peguei o caderno.
 
-Escrevi tudo: fluxo, etapas, regras, exceções.. cada detalhe.
+Escrevi tudo: fluxo, etapas, regras, exceções. Cada detalhe.
 
-Em poucos minutos, a lógica ficou **limpa**.  
-Quando voltei pro editor, o código saiu quase inteiro de uma vez.
+Em poucos minutos, a lógica ficou **limpa**. Quando voltei pro editor, o código saiu quase inteiro de uma vez.
 
 ### O ponto real: não é nostalgia, é controle
 
-Foi ali que entendi que escrever no papel não tem nada a ver com romantização.  
-Tem a ver com **controlar o próprio pensamento**.
+Foi ali que entendi que escrever no papel não tem nada a ver com romantização. Tem a ver com **controlar o próprio pensamento**.
 
-Longe da tela, eu paro de reagir a tudo e começo a construir a ideia do zero.  
-E quando finalmente abro o editor, não estou mais tentando “descobrir o código”.  
+Longe da tela, eu paro de reagir a tudo e começo a construir a ideia do zero. E quando finalmente abro o editor, não estou mais tentando "descobrir o código".
+
 Estou só digitando algo que já existe na minha cabeça.
 
 ### O hábito que ficou
 
 Hoje, aquela prática da UEPB que eu achava ridícula é exatamente o que mais me ajuda.
 
-Não porque o papel é melhor que o computador, mas porque ele **corta o ruído**.  
-Corta as distrações.  
-Corta o vício.
+Não porque o papel é melhor que o computador, mas porque ele **corta o ruído**.
+
+- Corta as distrações
+- Corta o vício
+- Corta a ilusão de que você está fazendo algo
 
 É o único momento em que eu penso em código sem ser sequestrado por notificações ou abas abertas que não têm nada a ver com o problema.
 
-**Antes do teclado, sempre vem o caderno.  
-E honestamente, isso salvou meu jeito de programar.**
+**Antes do teclado, sempre vem o caderno.**
+
+E honestamente, isso salvou meu jeito de programar.
