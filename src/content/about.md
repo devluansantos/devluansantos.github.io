@@ -29,7 +29,7 @@ Nada aqui representa empregadores ou organizações. É trabalho independente, o
 ## Contato
 
 Se quiser trocar ideia sobre algum vetor de ataque, sugerir correções ou só bater um papo sobre segurança, envie um e-mail:  
-[**luansrodrigues@proton.me**](mailto:luansrodrigues@proton.me)
+[**luansrodrigues@proton.me**](mailto:luansantos.dev@gmail.com)
 
 ---
 
